@@ -1,0 +1,12 @@
+.dataContainer {
+  padding: 2rem;
+  width: 20rem;
+  text-align: center;
+}
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+li {
+  margin-bottom: 2rem;
+}

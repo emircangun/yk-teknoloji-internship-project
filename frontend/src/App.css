@@ -1,0 +1,24 @@
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: rgb(36, 70, 242);
+  background: linear-gradient(
+    90deg,
+    rgba(36, 70, 242, 1) 0%,
+    rgba(70, 233, 252, 1) 45%,
+    rgba(70, 233, 252, 1) 55%,
+    rgba(36, 70, 242, 1) 100%
+  );
+}
+
+.mainContainer {
+  background-color: white;
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
