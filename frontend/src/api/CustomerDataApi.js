@@ -1,5 +1,6 @@
 export function getCustomerData(customerNo) {
   return {
+    customerNo: customerNo,
     firstName: "Yekta",
     lastName: "Yüksel",
     cards: [

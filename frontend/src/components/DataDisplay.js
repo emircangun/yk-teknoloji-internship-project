@@ -1,23 +1,29 @@
 import React from "react";
 import "./styles.css";
-
+import { Divider, List, Typography } from "antd";
 const DataDisplay = ({ data }) => {
   return (
     <React.Fragment>
       <div className="dataContainer">
-        <h2>
-          {data.firstName} {data.lastName}
-        </h2>
-        <ul>
-          {data.cards.map((card, index) => {
-            return (
-              <li key={index}>
-                {`Card No: ${card.cardNo}`} <br />
-                {`Card Limit: ${card.limit}`}
-              </li>
-            );
-          })}
-        </ul>
+        <List
+          size="large"
+          header={
+            <div>
+              <h2>
+                {data.firstName} {data.lastName}
+              </h2>
+              <br />
+              <h3>{data.customerNo}</h3>
+            </div>
+          }
+          bordered
+          dataSource={data.cards}
+          renderItem={(item) => (
+            <List.Item>
+              {`Card No: ${item.cardNo}`} <br /> {` Limit: ${item.limit}`}
+            </List.Item>
+          )}
+        />
       </div>
     </React.Fragment>
   );

@@ -1,7 +1,7 @@
 import "./App.css";
 import QueryComp from "./components/QueryComp";
 import DataDisplay from "./components/DataDisplay";
-import yktLogo from "./public/ykt-logo.png";
+import yktLogo from "./logo/ykt-logo.png";
 import { useState } from "react";
 
 function App() {
@@ -15,7 +15,9 @@ function App() {
   return (
     <div className="App">
       <div className="mainContainer">
-        <img src={yktLogo} alt="yk-logo" />
+        <div className="header">
+          <img src={yktLogo} alt="yk-logo" />
+        </div>
         {!showData && <QueryComp getData={getData} />}
         {showData && <DataDisplay data={data} />}
       </div>

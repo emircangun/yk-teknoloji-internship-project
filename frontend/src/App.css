@@ -16,9 +16,15 @@
 .mainContainer {
   background-color: white;
   height: 100vh;
+  width: 40vh;
   padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+
   flex-direction: column;
+}
+.header {
+  position: absolute;
+  top: 5rem;
 }
