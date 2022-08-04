@@ -1,4 +1,4 @@
-package cardlimitservice;
+package CardLimitService;
 
 import com.ykteknolojistaj.protointerface.*;
 import io.grpc.stub.StreamObserver;

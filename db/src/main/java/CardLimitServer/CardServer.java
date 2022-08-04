@@ -1,6 +1,6 @@
-package cardlimitserver;
+package CardLimitServer;
 
-import cardlimitservice.CardServiceImpl;
+import CardLimitService.CardServiceImpl;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
