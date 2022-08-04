@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package com.ykteknolojistaj.protointerface;
+
+option java_multiple_files = true;
+// java_package will be imported in other applications
+option java_package = "com.ykteknolojistaj.protointerface";
+option java_outer_classname = "CardProto";
+
+// Card service definition
+service CardService {
+  // Getting an array of cards from customer_no
+  rpc GetCards (CardRequest) returns (CardResponse) {
+  }
+}
+
+// The request message includes customer_no
+message CardRequest {
+  string customer_no = 1;
+}
+
+// The response message includes an array of "Card message"
+message CardResponse {
+  repeated Card cards = 1;  // array of Cards
+}
+
+// Card message structure
+message Card {
+  string card_no = 1;
+  double limit = 2;
+}
