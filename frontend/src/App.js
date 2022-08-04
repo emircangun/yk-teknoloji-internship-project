@@ -7,10 +7,18 @@ import { useState } from "react";
 function App() {
   const [data, setData] = useState({});
   const [showData, setShowData] = useState(false);
+  const [errorMessage,setErrorMessage] = useState(null)
 
   const getData = (data) => {
-    setData(data);
-    setShowData(true);
+      if (data.error != undefined) {
+      setErrorMessage(data.error)
+
+    } 
+    else {
+      setData(data);
+      setErrorMessage(null)
+      setShowData(true);
+    }
   };
   return (
     <div className="App">
@@ -20,6 +28,7 @@ function App() {
         </div>
         {!showData && <QueryComp getData={getData} />}
         {showData && <DataDisplay data={data} />}
+        {errorMessage && <p>Müşteri Bilgisi hatalıdır!</p>}
       </div>
     </div>
   );
