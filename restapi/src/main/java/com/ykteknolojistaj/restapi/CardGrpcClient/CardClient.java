@@ -2,6 +2,7 @@ package com.ykteknolojistaj.restapi.CardGrpcClient;
 
 import com.ykteknolojistaj.protointerface.*;
 
+import com.ykteknolojistaj.restapi.model.CardModel;
 import org.springframework.stereotype.Service;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import java.util.List;
