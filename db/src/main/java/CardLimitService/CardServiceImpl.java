@@ -1,8 +1,15 @@
 package CardLimitService;
 
-import com.ykteknolojistaj.protointerface.*;
+import CardService.CardService;
+import com.ykteknolojistaj.protointerface.Card;
+import com.ykteknolojistaj.protointerface.CardRequest;
+import com.ykteknolojistaj.protointerface.CardResponse;
+import com.ykteknolojistaj.protointerface.CardServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
+
+import javax.persistence.Entity;
+import java.math.BigDecimal;
 
 @GrpcService
 public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
@@ -13,16 +20,14 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
 
         // Following code creates dummy cards for the sake of test
         // Instead of this, run sql queries to get actual data
-        CardResponse.Builder builder = CardResponse.newBuilder();
-        int size = Integer.parseInt(request.getCustomerNo());
-        for (int i = 0; i < size; i++)
-        {
-            String card_no = "cardNoTest" + i;
-            double limit = 100.0 * i;
-            builder.addCards(Card.newBuilder().setCardNo(card_no).setLimit(limit).build());
-        }
-        //
 
+        CardService cardService = new CardService();
+
+        CardEntity.Card selectedCard = cardService.getCardLimitByCustomerNo(new BigDecimal((request.getCustomerNo())));
+
+        CardResponse.Builder builder = CardResponse.newBuilder();
+
+        builder.addCards(Card.newBuilder().setCardNo(selectedCard.getCardNo().toString()).setLimit(selectedCard.getLimit().doubleValue()).build());
 
         System.out.println(builder);
 
