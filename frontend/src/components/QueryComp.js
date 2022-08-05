@@ -1,20 +1,32 @@
-import { Button,Input } from "antd";
+import { Button, Input, Form } from "antd";
 import "./styles.css";
-import { getCustomerData } from "../api/CustomerDataApi";
-import { useState } from "react";
+import { SearchOutlined } from "@ant-design/icons";
 const QueryComp = ({ getData }) => {
-  const [customerNo,setCustomerNo] = useState(null)
+  const onFinish = (values) => {
+    if (values != null) {
+      getData(values);
+    }
+  };
 
   return (
-    <div>
-      <Input onChange={(e)=>{
-        setCustomerNo(e.target.value)
-        
-      }} placeholder="Müşteri Numarası Gir"/>
-      <Button disabled={customerNo == null || customerNo == ""}  onClick={() => {getData(getCustomerData(customerNo))}} type="primary">
-        Bilgileri Getir
-      </Button>
-    </div>
+    <Form onFinish={onFinish}>
+      <Form.Item
+        name="customerNo"
+        rules={[
+          {
+            required: true,
+            message: "Lütfen müşteri numarası giriniz!",
+          },
+        ]}
+      >
+        <Input placeholder="Müşteri Numarası" />
+      </Form.Item>
+      <Form.Item>
+        <Button htmlType="submit" type="primary" icon={<SearchOutlined />}>
+          Bilgileri Getir
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 

@@ -1,30 +1,37 @@
 import React from "react";
 import "./styles.css";
-import { Divider, List, Typography } from "antd";
-const DataDisplay = ({ data }) => {
+import { Table, Button } from "antd";
+const DataDisplay = ({ loading, data, toggle }) => {
+  const columns = [
+    {
+      title: "Kart Numarası",
+      dataIndex: "cardNo",
+      key: "cardNo",
+    },
+    {
+      title: "Limit",
+      dataIndex: "limit",
+      key: "limit",
+    },
+  ];
   return (
     <React.Fragment>
-      <div className="dataContainer">
-        <List
-          size="large"
-          header={
-            <div>
-              <h2>
-                {data.firstName} {data.lastName}
-              </h2>
-              <br />
-              <h3>{data.customerNo}</h3>
-            </div>
-          }
-          bordered
-          dataSource={data.cards}
-          renderItem={(item) => (
-            <List.Item>
-              {`Card No: ${item.cardNo}`} <br /> {` Limit: ${item.limit}`}
-            </List.Item>
-          )}
-        />
+      <div className="customer-info">
+        <h3>
+          {data.firstName} {data.lastName}
+        </h3>
+        <h4>{data.customerNo}</h4>
       </div>
+      <Table
+        loading={loading}
+        columns={columns}
+        bordered={true}
+        dataSource={data.cards}
+        pagination={{ position: "bottomCenter" }}
+      />
+      <Button type="primary" onClick={() => toggle()}>
+        Geri
+      </Button>
     </React.Fragment>
   );
 };
