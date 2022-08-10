@@ -24,6 +24,7 @@ import java.util.UUID;
 @Slf4j
 @Validated
 @RequiredArgsConstructor
+@CrossOrigin(origins="http://localhost:3000", methods={RequestMethod.GET, RequestMethod.PUT,RequestMethod.DELETE,RequestMethod.POST})
 @RequestMapping(path = "/api")
 public class CustomerLimitController {
     @Autowired

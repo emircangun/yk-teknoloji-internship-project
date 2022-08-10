@@ -5,7 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/db/card-limit-db-server.iml" filepath="$PROJECT_DIR$/db/card-limit-db-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/proto-interface/proto-interface.iml" filepath="$PROJECT_DIR$/proto-interface/proto-interface.iml" />
       <module fileurl="file://$PROJECT_DIR$/restapi/restapi.iml" filepath="$PROJECT_DIR$/restapi/restapi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/yk-intern-task.iml" filepath="$PROJECT_DIR$/.idea/yk-intern-task.iml" />
+
+      <module fileurl="file://$PROJECT_DIR$/.idea/yk-intern-task5.iml" filepath="$PROJECT_DIR$/.idea/yk-intern-task5.iml" />
+
     </modules>
   </component>
 </project>

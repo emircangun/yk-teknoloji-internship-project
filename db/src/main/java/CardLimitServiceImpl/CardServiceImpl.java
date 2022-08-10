@@ -9,6 +9,7 @@ import io.grpc.stub.StreamObserver;
 
 import net.devh.boot.grpc.server.service.GrpcService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @GrpcService
@@ -30,16 +31,17 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
         CardResponse.Builder builder = CardResponse.newBuilder();
 
         try {
-            //CardEntity.Card selectedCard = cardService.getCardLimitByCustomerNo(new BigDecimal((request.getCustomerNo())));
-            CardEntity.Card selectedCard = cardDao.findByCustomerNo(request.getCustomerNo());
-
-            // Building only one card from the coming card
-            builder.addCards(
-                    Card.newBuilder().
-                            setCardNo(selectedCard.getCardNo().toString()).
-                            setLimit(selectedCard.getLimit().doubleValue()).
-                            build()
-            );
+            List<CardEntity.Card> cardList = cardDao.findByCustomerNo(request.getCustomerNo());
+            for(CardEntity.Card selectedCard :cardList)
+            {
+                //Building only one card from the coming card
+                builder.addCards(
+                        Card.newBuilder().
+                                setCardNo(selectedCard.getCardNo().toString()).
+                                setLimit(selectedCard.getLimit().doubleValue()).
+                                build()
+                );
+            }
         } catch (NoSuchElementException noElementException) {
             System.out.println(noElementException);
         }
