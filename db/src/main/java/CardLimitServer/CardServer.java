@@ -1,14 +1,16 @@
 package CardLimitServer;
 
-import CardLimitService.CardServiceImpl;
+import CardLimitServiceImpl.CardServiceImpl;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.protobuf.services.ProtoReflectionService;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class CardServer {
     public Server server;
 
