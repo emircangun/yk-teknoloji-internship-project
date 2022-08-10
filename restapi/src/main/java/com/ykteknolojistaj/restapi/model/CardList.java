@@ -38,6 +38,22 @@ public class CardList {
     {
         return cards;
     }
+
+    @Override
+    public String toString() {
+
+        String temp = "";
+
+        for(int i = 0; i < cards.size(); i++){
+            temp += cards.get(i).toString();
+        }
+
+        return temp;
+    }
+
+    public int size(){
+        return cards.size();
+    }
 }
 
 

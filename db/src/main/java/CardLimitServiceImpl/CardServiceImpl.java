@@ -22,6 +22,7 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
      * @param request Request coming from REST API
      * @param responseObserver
      */
+    /*
     @Override
     public void getCards(CardRequest request, StreamObserver<CardResponse> responseObserver) {
         System.out.println("Request received from client: " + request);
@@ -47,6 +48,27 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
 
         // building the response to REST API
         CardResponse response = builder.build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    */
+
+    @Override
+    public void getCards(CardRequest request, StreamObserver<CardResponse> responseObserver) {
+        System.out.println("Request received from client:\n" + request);
+        CardResponse.Builder builder = CardResponse.newBuilder();
+        int size = Integer.parseInt(request.getCustomerNo());
+        for (int i = 0; i < size; i++)
+        {
+            String card_no = "cardNoTest" + i;
+            double limit = 100.0 * i;
+            builder.addCards(Card.newBuilder().setCardNo(card_no).setLimit(limit).build());
+        }
+
+        System.out.println(builder);
+
+        CardResponse response = builder.build();
+
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

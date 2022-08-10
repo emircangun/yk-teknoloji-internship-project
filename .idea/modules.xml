@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/db/card-limit-db-server.iml" filepath="$PROJECT_DIR$/db/card-limit-db-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proto-interface/proto-interface.iml" filepath="$PROJECT_DIR$/proto-interface/proto-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/restapi/restapi.iml" filepath="$PROJECT_DIR$/restapi/restapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/yk-intern-task.iml" filepath="$PROJECT_DIR$/.idea/yk-intern-task.iml" />
+    </modules>
+  </component>
+</project>
