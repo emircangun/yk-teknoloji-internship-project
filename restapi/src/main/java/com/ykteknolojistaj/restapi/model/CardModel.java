@@ -17,4 +17,9 @@ public class CardModel {
         return card_no;
     }
 
+    @Override
+    public String toString() {
+        return "CardNo:" + card_no + ",CardLimit:" + limit;
+    }
+
 }
