@@ -1,10 +1,13 @@
 package com.ykteknolojistaj.restapi.CardGrpcClient;
 
-import com.ykteknolojistaj.protointerface.*;
 
-import com.ykteknolojistaj.restapi.model.CardModel;
-import org.springframework.stereotype.Service;
+import com.ykteknolojistaj.protointerface.Card;
+import com.ykteknolojistaj.protointerface.CardRequest;
+import com.ykteknolojistaj.protointerface.CardResponse;
+import com.ykteknolojistaj.protointerface.CardServiceGrpc;
 import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
