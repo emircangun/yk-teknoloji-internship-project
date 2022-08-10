@@ -8,14 +8,13 @@ public class CardModel {
         this.card_no=currentCardNo;
         this.limit=currentLimit;
     }
+
     public double getLimit() {
-
         return limit;
-
     }
+
     public String getCard_no() {
-
         return card_no;
-
     }
+
 }
