@@ -16,17 +16,16 @@ import java.util.UUID;
 
 
 public class CardDao {
-    /**
-     * Returning the card of the given customer no
-     * @param customerNo requested customer no
-     * @return Card of the given customer
-     */
 
     // creating entity managers
 
     private static final Logger LOG = LogManager.getLogger(CardDao.class.getName());
 
-
+    /**
+     * Returning the card of the given customer no
+     * @param customerNo requested customer no
+     * @return Card of the given customer
+     */
     public List<Card> findByCustomerNo(String customerNo, String currID){
 
         String uniqueID = currID;
@@ -41,7 +40,7 @@ public class CardDao {
         EntityManager em = emf.createEntityManager();
 
         // get Card from the database
-        List result = em.createQuery(
+        List<Card> result = em.createQuery(
                 "SELECT c FROM Card c WHERE c.customerNo = :customerNo",Card.class).setParameter("customerNo", customerNo).getResultList();
 
         // if there is no data with corresponding customer no
@@ -69,7 +68,7 @@ public class CardDao {
         EntityManager em = emf.createEntityManager();
 
         // get Card from the database
-        List result = em.createQuery(
+        List<Card> result = em.createQuery(
                 "SELECT c FROM Card c WHERE c.accountNo = :accountNo",Card.class).setParameter("accountNo", AccountNo).getResultList();
 
         // if there is no data with corresponding account no
@@ -87,7 +86,7 @@ public class CardDao {
         EntityManager em = emf.createEntityManager();
 
         // get Card from the database
-        List result = em.createQuery(
+        List<Card> result = em.createQuery(
                 "SELECT c FROM Card c WHERE c.cardNo = :cardNo",Card.class).setParameter("cardNo", CardNo).getResultList();
 
         // if there is no data with corresponding card no
