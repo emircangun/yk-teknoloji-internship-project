@@ -27,9 +27,9 @@ public class CardDao {
     private static final Logger LOG = LogManager.getLogger(CardDao.class.getName());
 
 
-    public List<Card> findByCustomerNo(String customerNo){
+    public List<Card> findByCustomerNo(String customerNo, String currID){
 
-        String uniqueID = UUID.randomUUID().toString();
+        String uniqueID = currID;
         //Response icerigi ogrenilip customer no log constructer icine yazilacak
         LoggingMessage loggingMessage = new LoggingMessage(customerNo, uniqueID, "Connecting to DB and searching for cards with customer no.", "CardDao", "start");
         String logMessage = loggingMessage.toString();

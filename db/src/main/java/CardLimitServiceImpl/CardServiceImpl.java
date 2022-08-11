@@ -35,7 +35,7 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
     public void getCards(CardRequest request, StreamObserver<CardResponse> responseObserver) {
         //System.out.println("Request received from client: " + request);
 
-        String uniqueID = UUID.randomUUID().toString();
+        String uniqueID = request.getCorrID();
         //Response icerigi ogrenilip customer no log constructer icine yazilacak
         LoggingMessage loggingMessage = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB recieved request from client: " + request, "getCards", "start");
         String logMessage = loggingMessage.toString();
@@ -44,7 +44,7 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
         CardResponse.Builder builder = CardResponse.newBuilder();
 
         try {
-            List<CardEntity.Card> cardList = cardDao.findByCustomerNo(request.getCustomerNo());
+            List<CardEntity.Card> cardList = cardDao.findByCustomerNo(request.getCustomerNo(), uniqueID);
             for(CardEntity.Card selectedCard :cardList)
             {
                 //Building only one card from the coming card

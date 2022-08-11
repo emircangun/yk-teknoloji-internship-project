@@ -17,6 +17,7 @@ service CardService {
 // The request message includes customer_no
 message CardRequest {
   string customer_no = 1;
+  string corrID = 2;
 }
 
 // The response message includes an array of "Card message"

@@ -33,6 +33,7 @@ public class CardClient {
 
         CardRequest request = CardRequest.newBuilder()
                 .setCustomerNo(customer_no)
+                .setCorrID(corrID)
                 .build();
 
         CardResponse response = cardServiceStub.getCards(request);
