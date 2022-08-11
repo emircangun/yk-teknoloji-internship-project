@@ -1,12 +1,12 @@
 package com.ykteknolojistaj.restapi.model;
 
 public class CardModel {
-    private String card_no;
-    private double limit;
+    private final String card_no;
+    private final double limit;
 
     public CardModel(String currentCardNo, double currentLimit) {
-        this.card_no=currentCardNo;
-        this.limit=currentLimit;
+        this.card_no = currentCardNo;
+        this.limit = currentLimit;
     }
 
     public double getLimit() {
@@ -17,6 +17,10 @@ public class CardModel {
         return card_no;
     }
 
+    /**
+     * Converting the card to String.
+     * @return serialized Card
+     */
     @Override
     public String toString() {
         return "CardNo:" + card_no + ",CardLimit:" + limit;
