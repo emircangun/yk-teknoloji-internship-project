@@ -17,9 +17,6 @@ const DataDisplay = ({ loading, data, toggle }) => {
   return (
     <React.Fragment>
       <div className="customer-info">
-        <h3>
-          {data.firstName} {data.lastName}
-        </h3>
         <h4>{data.customerNo}</h4>
       </div>
       <Table

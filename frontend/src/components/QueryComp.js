@@ -1,10 +1,11 @@
 import { Button, Input, Form } from "antd";
 import "./styles.css";
 import { SearchOutlined } from "@ant-design/icons";
+
 const QueryComp = ({ getData }) => {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     if (values != null) {
-      getData(values);
+      await getData(values);
     }
   };
 

@@ -12,29 +12,16 @@ function App() {
   const [tableLoading, setTableLoading] = useState(false);
 
   const getData = async (values) => {
-    let _data = {};
     try {
-      toggle();
+      setShowData((prevState) => !prevState);
       setTableLoading((prevState) => !prevState);
-      _data = await getCustomerData(values);
+      await getCustomerData(values, setData);
     } catch (err) {
       console.log(err);
       message.error("Müşteri aranırken bir hata oluştu!");
-      toggle();
+      setShowData((prevState) => !prevState);
     }
-    console.log(_data);
-    if (_data != null) {
-      setData(_data);
-      setTableLoading((prevState) => !prevState);
-    } else if (_data == null) {
-      toggle();
-      setTableLoading((prevState) => !prevState);
-      message.warning("Böyle bir müşteri bulunmamaktadır!");
-    }
-  };
-
-  const toggle = () => {
-    setShowData((prevState) => !prevState);
+    setTableLoading((prevState) => !prevState);
   };
 
   return (
@@ -46,7 +33,11 @@ function App() {
         <Card title="Kart Limit Sorgulama" className="query">
           {!showData && <QueryComp getData={getData} />}
           {showData && (
-            <DataDisplay loading={tableLoading} data={data} toggle={toggle} />
+            <DataDisplay
+              loading={tableLoading}
+              data={data}
+              toggle={() => setShowData((prevState) => !prevState)}
+            />
           )}
         </Card>
       </div>
