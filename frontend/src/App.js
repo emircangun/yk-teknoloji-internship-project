@@ -14,20 +14,23 @@ function App() {
   const getData = async (values) => {
     let _data = {};
     try {
-      setTableLoading((prevState) => !prevState);
       toggle();
+      setTableLoading((prevState) => !prevState);
       _data = await getCustomerData(values);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      message.error("Müşteri aranırken bir hata oluştu!");
+      toggle();
     }
-
+    console.log(_data);
     if (_data != null) {
       setData(_data);
+      setTableLoading((prevState) => !prevState);
     } else if (_data == null) {
       toggle();
+      setTableLoading((prevState) => !prevState);
       message.warning("Böyle bir müşteri bulunmamaktadır!");
     }
-    setTableLoading((prevState) => !prevState);
   };
 
   const toggle = () => {
