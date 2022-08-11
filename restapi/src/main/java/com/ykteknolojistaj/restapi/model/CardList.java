@@ -31,29 +31,34 @@ public class CardList {
     }
 
     /**
-     * cards getter
-     * @return list of java card model
+     * @return the list of CardModel
      */
-    public List<CardModel> getCards()
-    {
+    public List<CardModel> getCards() {
         return cards;
     }
 
-    @Override
-    public String toString() {
-
-        String temp = "";
-
-        for(int i = 0; i < cards.size(); i++){
-            temp += cards.get(i).toString();
-        }
-
-        return temp;
-    }
-
-    public int size(){
+    /**
+     * @return size of the list
+     */
+    public int size() {
         return cards.size();
     }
+
+    /**
+     * Converting each card in the list to String.
+     * @return serialized list as String
+     */
+    @Override
+    public String toString() {
+        StringBuilder temp = new StringBuilder();
+
+        for (CardModel card : cards) {
+            temp.append(card.toString());
+        }
+
+        return temp.toString();
+    }
+
 }
 
 
