@@ -1,7 +1,5 @@
 package com.ykteknolojistaj.restapi.model;
 
-import java.util.List;
-
 public class LoggingMessage {
 
     private String customerNo = "";
