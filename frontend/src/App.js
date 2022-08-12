@@ -8,7 +8,6 @@ import { message, Divider, Layout } from "antd";
 
 function App() {
   const [data, setData] = useState({});
-  const [showData, setShowData] = useState(false);
   const [tableLoading, setTableLoading] = useState(false);
   const { Header, Content } = Layout;
   function getCustomerData(values) {
@@ -33,18 +32,15 @@ function App() {
   }
   const getData = async (values) => {
     try {
-      setShowData((prevState) => !prevState);
       setTableLoading((prevState) => !prevState);
       await getCustomerData(values);
 
       if (data.cards.length == 0) {
         message.warning("Böyle bir müşteri bulunmamakta!");
-        setShowData((prevState) => !prevState);
       }
     } catch (err) {
       console.log(err);
       message.error("Müşteri aranırken bir hata oluştu!");
-      setShowData((prevState) => !prevState);
     }
 
     setTableLoading((prevState) => !prevState);
@@ -55,26 +51,18 @@ function App() {
       <div className="mainContainer">
         <Layout>
           <Header className="header">
-            <img src={yktLogo} alt="yk-logo" />
+            <img src={yktLogo} alt="ykt-logo" />
           </Header>
         </Layout>
-
         <Layout>
           <Content>
             <div className="query">
               <h2>Kart Limit Sorgulama</h2>
-
-              {!showData && <QueryComp getData={getData} />}
-              {showData && (
-                <DataDisplay
-                  loading={tableLoading}
-                  data={data}
-                  toggle={() => setShowData((prevState) => !prevState)}
-                />
-              )}
+              <QueryComp getData={getData} />
+              <Divider />
+              <DataDisplay loading={tableLoading} data={data} />
             </div>
           </Content>
-          <Divider />
         </Layout>
       </div>
     </div>

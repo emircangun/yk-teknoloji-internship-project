@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import { Table, Button } from "antd";
-const DataDisplay = ({ loading, data, toggle }) => {
+const DataDisplay = ({ loading, data }) => {
   const columns = [
     {
       title: "Kart Numarası",
@@ -25,11 +25,8 @@ const DataDisplay = ({ loading, data, toggle }) => {
         columns={columns}
         bordered={true}
         dataSource={data.cards}
-        pagination={{ position: "bottomCenter" }}
+        size="large"
       />
-      <Button type="primary" onClick={() => toggle()}>
-        Geri
-      </Button>
     </React.Fragment>
   );
 };
