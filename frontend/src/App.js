@@ -21,14 +21,13 @@ function App() {
       if (data.cards.length == 0) {
         message.warning("Böyle bir müşteri bulunmamakta!");
         setShowData((prevState) => !prevState);
-        setTableLoading((prevState) => !prevState);
-        return;
       }
     } catch (err) {
       console.log(err);
       message.error("Müşteri aranırken bir hata oluştu!");
       setShowData((prevState) => !prevState);
     }
+
     setTableLoading((prevState) => !prevState);
   };
 
