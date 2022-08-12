@@ -5,8 +5,8 @@ const DataDisplay = ({ loading, data, toggle }) => {
   const columns = [
     {
       title: "Kart Numarası",
-      dataIndex: "cardNo",
-      key: "cardNo",
+      dataIndex: "card_no",
+      key: "card_no",
     },
     {
       title: "Limit",
@@ -14,6 +14,7 @@ const DataDisplay = ({ loading, data, toggle }) => {
       key: "limit",
     },
   ];
+
   return (
     <React.Fragment>
       <div className="customer-info">

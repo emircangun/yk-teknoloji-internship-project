@@ -12,7 +12,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   box-shadow: 0.1rem 0.2rem 0.7rem 0.06rem black;
   border-radius: 2%;
+  padding: 3rem;
 }

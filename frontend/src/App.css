@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100%;
   background: rgb(36, 70, 242);
   background: linear-gradient(
     90deg,
@@ -16,15 +16,19 @@
 .mainContainer {
   background-color: white;
   height: 100vh;
-  width: 40vh;
   padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-direction: column;
 }
 .header {
-  position: absolute;
-  top: 5rem;
+  background-color: white !important;
+}
+
+.layout {
+  height: 100%;
+}
+h2 {
+  margin: 2rem;
 }

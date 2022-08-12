@@ -24,8 +24,14 @@ const QueryComp = ({ getData }) => {
         <Input placeholder="Müşteri Numarası" />
       </Form.Item>
       <Form.Item>
-        <Button htmlType="submit" type="primary" icon={<SearchOutlined />}>
-          Bilgileri Getir
+        <Button
+          className="right-flaoted"
+          htmlType="submit"
+          type="primary"
+          block
+          icon={<SearchOutlined />}
+        >
+          Ara
         </Button>
       </Form.Item>
     </Form>
