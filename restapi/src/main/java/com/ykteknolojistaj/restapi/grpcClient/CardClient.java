@@ -1,4 +1,4 @@
-package com.ykteknolojistaj.restapi.CardGrpcClient;
+package com.ykteknolojistaj.restapi.grpcClient;
 
 import com.ykteknolojistaj.protointerface.Card;
 import com.ykteknolojistaj.protointerface.CardRequest;
