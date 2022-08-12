@@ -4,6 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 
 const QueryComp = ({ getData }) => {
   const onFinish = async (values) => {
+    console.log(values);
     if (values != null) {
       await getData(values);
     }

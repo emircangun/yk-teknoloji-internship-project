@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export async function getCustomerData(values, setData) {
   // return new Promise((reject, resolve) => {
   //   const list = [
@@ -72,17 +73,19 @@ export async function getCustomerData(values, setData) {
 
   axios({
     method: "get",
-    url: "localhost:8080/get-cards",
+    url: "http://localhost:8080/api/getCards",
     params: {
-      customerNo: values.customerNo,
+      customer_no: values.customerNo,
     },
   })
-    .then((res) => {
-      const data = {
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      const data2 = {
         customerNo: values.customerNo,
-        cards: res,
+        cards: data,
       };
-      setData(data);
+      setData(data2);
     })
     .catch((err) => console.log(err));
 }
