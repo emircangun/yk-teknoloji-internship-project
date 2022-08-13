@@ -19,18 +19,6 @@ public class ExceptionTemplate {
         timestamp = LocalDateTime.now();
     }
 
-    ExceptionTemplate(HttpStatus status) {
-        this();
-        this.status = status;
-    }
-
-    ExceptionTemplate(HttpStatus status, Throwable ex) {
-        this();
-        this.status = status;
-        this.message = "Unexpected error";
-        this.debugMessage = ex.getLocalizedMessage();
-    }
-
     ExceptionTemplate(HttpStatus status, String message, Throwable ex) {
         this();
         this.status = status;

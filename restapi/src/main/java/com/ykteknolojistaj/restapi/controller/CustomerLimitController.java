@@ -13,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.ykteknolojistaj.restapi.service.GetCardsService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Pattern;
 
 import java.util.List;
@@ -47,7 +46,7 @@ public class CustomerLimitController {
      * @return All cards which belong to the given customer
      */
     @GetMapping(path = "/getCards", produces = "application/json")
-    public List<CardModel> getCardsApi(@RequestParam(value = "customer_no") @Pattern(regexp = "[1-9]{1}[0-9]{9}") String customer_no, HttpServletRequest request) {
+    public List<CardModel> getCardsApi(@RequestParam(value = "customer_no") @Pattern(regexp = "[1-9]{1}[0-9]{9}") String customer_no) {
         // creating unique id for the request and used it for logging
         String uniqueID = UUID.randomUUID().toString();
 
