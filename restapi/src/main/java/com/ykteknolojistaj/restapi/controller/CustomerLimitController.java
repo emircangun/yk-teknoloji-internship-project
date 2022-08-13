@@ -1,6 +1,6 @@
 package com.ykteknolojistaj.restapi.controller;
 
-import com.ykteknolojistaj.restapi.CardGrpcClient.CardClient;
+import com.ykteknolojistaj.restapi.grpcClient.CardClient;
 import com.ykteknolojistaj.protointerface.*;
 import com.ykteknolojistaj.restapi.model.CardList;
 import com.ykteknolojistaj.restapi.model.CardModel;
@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.ykteknolojistaj.restapi.service.GetCardsService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Pattern;
@@ -31,7 +32,9 @@ import java.util.UUID;
 @RequestMapping(path = "/api")
 public class CustomerLimitController {
     @Autowired
-    private final CardClient cardService;
+    private final CardClient grpcLimitClient;
+
+    private final GetCardsService getCardsService;
 
     private static final Logger LOG = LogManager.getLogger(CustomerLimitController.class.getName());
 
@@ -47,10 +50,6 @@ public class CustomerLimitController {
      */
     @GetMapping(path = "/getCards", produces = "application/json")
     public List<CardModel> getCardsApi(@RequestParam(value = "customer_no") @Pattern(regexp = "[1-9]{1}[0-9]{9}") String customer_no, HttpServletRequest request) {
-        // initializing empty cardList
-        CardList cardList = new CardList();
-        request.setAttribute("corrID", "1asdfpıasjfawh9upfhuıfhausd");
-        System.out.println(request);
         // creating unique id for the request and used it for logging
         String uniqueID = UUID.randomUUID().toString();
 
@@ -58,19 +57,7 @@ public class CustomerLimitController {
         String logMessage = loggingMessage.toString();
         LOG.log(Level.INFO, logMessage);
 
-        //by using customer_no, getting all cards from the gRPC server (customer database microservice)
-        // the return type is protointerface.card class
-        List<Card> cardModels = cardService.receiveCards(customer_no, uniqueID);
-
-        // copying all protointerface.card models to CardModel to use in response
-        cardList.copyProtoCardArray(cardModels);
-
-        // Loggging the response
-        LoggingMessage loggingMessage2 = new LoggingMessage(customer_no, uniqueID, "Got a response from CardClient and the returned card(s) are: " + cardList.toString(), "CustomerLimitController", "end");
-        logMessage = loggingMessage2.toString();
-        LOG.log(Level.INFO, logMessage);
-
-        return cardList.getCards();
+        return getCardsService.getCards(grpcLimitClient, customer_no, uniqueID);
     }
 
 }
