@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CardClient {
+public class CardLimitClient {
 
     @GrpcClient("cardService")
     private CardServiceGrpc.CardServiceBlockingStub cardServiceStub;
 
-    private static final Logger LOG = LogManager.getLogger(CardClient.class.getName());
+    private static final Logger LOG = LogManager.getLogger(CardLimitClient.class.getName());
 
     /**
      * Getting all cards of the given customer no by requesting it from the database microservice
