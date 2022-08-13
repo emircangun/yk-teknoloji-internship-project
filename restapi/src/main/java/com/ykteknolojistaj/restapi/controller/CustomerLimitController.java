@@ -1,8 +1,6 @@
 package com.ykteknolojistaj.restapi.controller;
 
-import com.ykteknolojistaj.restapi.grpcClient.CardClient;
-import com.ykteknolojistaj.protointerface.*;
-import com.ykteknolojistaj.restapi.model.CardList;
+import com.ykteknolojistaj.restapi.grpcClient.CardLimitClient;
 import com.ykteknolojistaj.restapi.model.CardModel;
 import com.ykteknolojistaj.restapi.model.LoggingMessage;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +30,7 @@ import java.util.UUID;
 @RequestMapping(path = "/api")
 public class CustomerLimitController {
     @Autowired
-    private final CardClient grpcLimitClient;
+    private final CardLimitClient grpcLimitClient;
 
     private final GetCardsService getCardsService;
 
@@ -53,7 +51,7 @@ public class CustomerLimitController {
         // creating unique id for the request and used it for logging
         String uniqueID = UUID.randomUUID().toString();
 
-        LoggingMessage loggingMessage = new LoggingMessage(customer_no, uniqueID, "CustomerLimitController got a request, now calling CardClient", "CustomerLimitController", "start");
+        LoggingMessage loggingMessage = new LoggingMessage(customer_no, uniqueID, "CustomerLimitController got a request, now calling GetCardsService", "CustomerLimitController", "start");
         String logMessage = loggingMessage.toString();
         LOG.log(Level.INFO, logMessage);
 
