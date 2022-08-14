@@ -38,16 +38,7 @@ public class CustomerLimitController {
 
     private static final Logger LOG = LogManager.getLogger(CustomerLimitController.class.getName());
 
-    /**
-     * Get mapping on '/api/getCards' endpoint. Uses one parameter as 'customer_no'
-     * and by using it requesting corresponding cards from the gRPC server. Exceptions
-     * are handled in exceptionHandler package.
-     *
-     * Example usage: /api/getCards?customer_no=1234567890
-     *
-     * @param customer_no Customer no parameter from the request
-     * @return All cards which belong to the given customer
-     */
+
     @ApiResponses(value = {
             @ApiResponse( responseCode = "200", description = "Cards are found.",
                     content = { @Content(mediaType = "application/json", schema = @Schema(implementation = CardModel.class))} ),
@@ -60,6 +51,16 @@ public class CustomerLimitController {
             }
     )
     @GetMapping(path = "/getCards", produces = "application/json")
+    /**
+     * Get mapping on '/api/getCards' endpoint. Uses one parameter as 'customer_no'
+     * and by using it requesting corresponding cards from the gRPC server. Exceptions
+     * are handled in exceptionHandler package.
+     *
+     * Example usage: /api/getCards?customer_no=1234567890
+     *
+     * @param customer_no Customer no parameter from the request
+     * @return All cards which belong to the given customer
+     */
     public List<CardModel> getCardsApi(@RequestParam(value = "customer_no") @Pattern(regexp = "[1-9][0-9]{9}") String customer_no) {
         // creating unique id for the request and used it for logging
         String uniqueID = UUID.randomUUID().toString();

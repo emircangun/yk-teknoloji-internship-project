@@ -22,10 +22,9 @@ public class CardListModel {
      */
     public void copyProtoCardArray(List<com.ykteknolojistaj.protointerface.Card> protoCards)
     {
-        for (int i = 0; i < protoCards.size(); i++)
-        {
-            String currentCardNo = protoCards.get(i).getCardNo();
-            double currentLimit = protoCards.get(i).getLimit();
+        for (com.ykteknolojistaj.protointerface.Card protoCard : protoCards) {
+            String currentCardNo = protoCard.getCardNo();
+            double currentLimit = protoCard.getLimit();
             cards.add(new CardModel(currentCardNo, currentLimit));
         }
     }

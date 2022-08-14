@@ -18,9 +18,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import io.grpc.StatusRuntimeException;
 import javax.validation.ConstraintViolationException;
 
-/**
- * Global REST API error handler
- */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
