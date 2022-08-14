@@ -1,6 +1,6 @@
 package com.ykteknolojistaj.restapi.controller;
 
-import com.ykteknolojistaj.restapi.grpcClient.CardLimitClient;
+import com.ykteknolojistaj.restapi.service.CardService;
 import com.ykteknolojistaj.restapi.model.CardModel;
 import com.ykteknolojistaj.restapi.model.LoggingMessage;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.ykteknolojistaj.restapi.service.GetCardsService;
+import com.ykteknolojistaj.restapi.dao.GetCardsDao;
 
 import javax.validation.constraints.Pattern;
 
@@ -29,9 +29,9 @@ import java.util.UUID;
 @RequestMapping(path = "/api")
 public class CustomerLimitController {
     @Autowired
-    private final CardLimitClient grpcLimitClient;
+    private final CardService grpcLimitClient;
 
-    private final GetCardsService getCardsService;
+    private final GetCardsDao getCardsDao;
 
     private static final Logger LOG = LogManager.getLogger(CustomerLimitController.class.getName());
 
@@ -54,7 +54,7 @@ public class CustomerLimitController {
         String logMessage = loggingMessage.toString();
         LOG.log(Level.INFO, logMessage);
 
-        return getCardsService.getCards(grpcLimitClient, customer_no, uniqueID);
+        return getCardsDao.getCards(grpcLimitClient, customer_no, uniqueID);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.ykteknolojistaj.restapi.grpcClient;
+package com.ykteknolojistaj.restapi.service;
 
 import com.ykteknolojistaj.protointerface.Card;
 import com.ykteknolojistaj.protointerface.CardRequest;
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CardLimitClient {
+public class CardService {
 
     @GrpcClient("cardService")
     private CardServiceGrpc.CardServiceBlockingStub cardServiceStub;
 
-    private static final Logger LOG = LogManager.getLogger(CardLimitClient.class.getName());
+    private static final Logger LOG = LogManager.getLogger(CardService.class.getName());
 
     /**
      * Getting all cards of the given customer no by requesting it from the database microservice

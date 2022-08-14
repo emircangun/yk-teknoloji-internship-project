@@ -3,7 +3,7 @@ package com.ykteknolojistaj.restapi.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardList {
+public class CardListModel {
 
     // cards list consists of java card model
     private final List<CardModel> cards;
@@ -11,7 +11,7 @@ public class CardList {
     /**
      * Default constructor, initializing cards list as empty
      */
-    public CardList()
+    public CardListModel()
     {
         cards = new ArrayList<>();
     }
