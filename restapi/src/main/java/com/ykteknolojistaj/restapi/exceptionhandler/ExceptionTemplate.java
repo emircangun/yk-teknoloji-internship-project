@@ -1,4 +1,4 @@
-package com.ykteknolojistaj.restapi.exceptionHandler;
+package com.ykteknolojistaj.restapi.exceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
