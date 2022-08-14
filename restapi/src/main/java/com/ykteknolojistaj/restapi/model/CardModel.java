@@ -23,7 +23,7 @@ public class CardModel {
      */
     @Override
     public String toString() {
-        return "CardNo:" + card_no + ",CardLimit:" + limit;
+        return "CardNo: " + card_no + ", CardLimit:" + limit;
     }
 
 }

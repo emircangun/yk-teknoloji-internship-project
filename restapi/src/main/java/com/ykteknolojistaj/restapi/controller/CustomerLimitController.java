@@ -1,17 +1,15 @@
 package com.ykteknolojistaj.restapi.controller;
 
-import com.ykteknolojistaj.restapi.service.CardService;
+import builder.LogMessageBuilder;
 import com.ykteknolojistaj.restapi.model.CardModel;
-import com.ykteknolojistaj.restapi.model.LoggingMessage;
+import com.ykteknolojistaj.restapi.service.CardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.ykteknolojistaj.restapi.dao.GetCardsDao;
 
 import javax.validation.constraints.Pattern;
 
@@ -28,10 +26,8 @@ import java.util.UUID;
 @CrossOrigin(origins="http://localhost:3000", methods={RequestMethod.GET, RequestMethod.PUT,RequestMethod.DELETE,RequestMethod.POST})
 @RequestMapping(path = "/api")
 public class CustomerLimitController {
-    @Autowired
-    private final CardService cardService;
 
-    private final GetCardsDao getCardsDao;
+    private final CardService cardService;
 
     private static final Logger LOG = LogManager.getLogger(CustomerLimitController.class.getName());
 
@@ -46,15 +42,32 @@ public class CustomerLimitController {
      * @return All cards which belong to the given customer
      */
     @GetMapping(path = "/getCards", produces = "application/json")
-    public List<CardModel> getCardsApi(@RequestParam(value = "customer_no") @Pattern(regexp = "[1-9]{1}[0-9]{9}") String customer_no) {
+    public List<CardModel> getCardsApi(@RequestParam(value = "customer_no") @Pattern(regexp = "[1-9][0-9]{9}") String customer_no) {
         // creating unique id for the request and used it for logging
         String uniqueID = UUID.randomUUID().toString();
 
-        LoggingMessage loggingMessage = new LoggingMessage(customer_no, uniqueID, "CustomerLimitController got a request, now calling GetCardsService", "CustomerLimitController", "start");
-        String logMessage = loggingMessage.toString();
-        LOG.log(Level.INFO, logMessage);
+        // logging before getting cards
+        LogMessageBuilder.Log(
+                LOG, customer_no, uniqueID,
+                this.getClass().getSimpleName(),
+                this.getClass().getSimpleName() + " got a request, now calling CardService",
+                "start",
+                Level.INFO
+        );
 
-        return getCardsDao.getCards(cardService, customer_no, uniqueID);
+        // getting cards from database microservice
+        List<CardModel> cardsOfCustomer = cardService.getCards(customer_no, uniqueID);
+
+        // logging after handling the request
+        LogMessageBuilder.Log(
+                LOG, customer_no, uniqueID,
+                this.getClass().getSimpleName(),
+                this.getClass().getSimpleName() + " handled the request, returns: " + cardsOfCustomer,
+                "end",
+                Level.INFO
+        );
+
+        return cardsOfCustomer;
     }
 
 }
