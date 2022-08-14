@@ -29,7 +29,7 @@ import java.util.UUID;
 @RequestMapping(path = "/api")
 public class CustomerLimitController {
     @Autowired
-    private final CardService grpcLimitClient;
+    private final CardService cardService;
 
     private final GetCardsDao getCardsDao;
 
@@ -54,7 +54,7 @@ public class CustomerLimitController {
         String logMessage = loggingMessage.toString();
         LOG.log(Level.INFO, logMessage);
 
-        return getCardsDao.getCards(grpcLimitClient, customer_no, uniqueID);
+        return getCardsDao.getCards(cardService, customer_no, uniqueID);
     }
 
 }
