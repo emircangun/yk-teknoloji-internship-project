@@ -5,12 +5,10 @@ import java.io.IOException;
 
 public class CardLimitApplication {
 
-    // exceptions do not be handled
     public static void main(String[] args) throws IOException, InterruptedException {
         final CardServer cardServer = new CardServer();
-        cardServer.start();
+        cardServer.start(9091);
         cardServer.server.awaitTermination();
     }
-
 
 }

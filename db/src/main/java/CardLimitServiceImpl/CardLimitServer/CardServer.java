@@ -14,10 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class CardServer {
     public Server server;
 
-    public void start() throws IOException {
-        // Port number is hard-coded
-        // It will be nice to get the port number from properties file
-        int port = 9091;
+    public void start(int port) throws IOException {
 
         server = ServerBuilder.forPort(port)
                 .addService(new CardServiceImpl())
@@ -25,16 +22,13 @@ public class CardServer {
                 .build()
                 .start();
 
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                System.err.println("Shutting down gRPC server.");
-                try {
-                    server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
-                } catch (InterruptedException e) {
-                    e.printStackTrace(System.err);
-                }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.err.println("Shutting down gRPC server.");
+            try {
+                server.shutdown().awaitTermination(30, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                e.printStackTrace(System.err);
             }
-        });
+        }));
     }
 }

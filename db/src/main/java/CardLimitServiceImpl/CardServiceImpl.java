@@ -1,5 +1,6 @@
 package CardLimitServiceImpl;
 
+import builder.LogMessageBuilder;
 import com.ykteknolojistaj.protointerface.Card;
 import com.ykteknolojistaj.protointerface.CardRequest;
 import com.ykteknolojistaj.protointerface.CardResponse;
@@ -24,48 +25,60 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
 
     private static final Logger LOG = LogManager.getLogger(CardServiceImpl.class.getName());
 
+    @Override
     /**
      * Overriding Protobuf getCards service. Getting customerNo from the request and
      * using it by calling cardDao.
      * @param request Request coming from REST API
      * @param responseObserver
      */
-
-    @Override
     public void getCards(CardRequest request, StreamObserver<CardResponse> responseObserver) {
-
+        // for logging purpose
         String uniqueID = request.getCorrID();
-        LoggingMessage loggingMessage = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB recieved request from client: " + request, "getCards", "start");
-        String logMessage = loggingMessage.toString();
-        LOG.log(Level.INFO, logMessage);
 
+        // logging received request
+        LogMessageBuilder.Log(
+                LOG, request.getCustomerNo(), uniqueID,
+                this.getClass().getSimpleName(),
+                "DB received request from client: " + request,
+                "start",
+                Level.INFO
+        );
+
+        // response will be build by using protointerface methods
         CardResponse.Builder builder = CardResponse.newBuilder();
-
         try {
+            // getting cards from dao
             List<CardEntity.Card> cardList = cardDao.findByCustomerNo(request.getCustomerNo(), uniqueID);
             for(CardEntity.Card selectedCard :cardList)
             {
                 //Building only one card from the coming cards
-                builder.addCards(
-                        Card.newBuilder().
+                builder.addCards(Card.newBuilder().
                                 setCardNo(selectedCard.getCardNo()).
                                 setLimit(selectedCard.getLimit().doubleValue()).
                                 build()
                 );
             }
 
-            LoggingMessage loggingMessage2 = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB found card(s)" + builder, "getCards", "end");
-            logMessage = loggingMessage2.toString();
-            LOG.log(Level.INFO, logMessage);
+            // logging founded cards
+            LogMessageBuilder.Log(
+                    LOG, request.getCustomerNo(), uniqueID,
+                    this.getClass().getSimpleName(),
+                    "DB found card(s)" + builder,
+                    "end",
+                    Level.INFO
+            );
 
         } catch (NoSuchElementException noElementException) {
-            //System.out.println(noElementException);
-            LoggingMessage loggingMessage3 = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB did not found any card", "getCards", "end");
-            logMessage = loggingMessage3.toString();
-            LOG.log(Level.ERROR, logMessage);
+            // logging error message
+            LogMessageBuilder.Log(
+                    LOG, request.getCustomerNo(), uniqueID,
+                    this.getClass().getSimpleName(),
+                    "DB did not found any card",
+                    "end",
+                    Level.ERROR
+            );
         }
-
-        //System.out.println(builder);
 
         // building the response to REST API
         CardResponse response = builder.build();
