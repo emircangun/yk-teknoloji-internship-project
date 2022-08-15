@@ -11,7 +11,7 @@ const QueryComp = ({ getData }) => {
   };
 
   return (
-    <Form onFinish={onFinish}>
+    <Form onFinish={onFinish} size="large">
       <Form.Item
         name="customerNo"
         rules={[
@@ -21,10 +21,11 @@ const QueryComp = ({ getData }) => {
           },
         ]}
       >
-        <Input placeholder="Müşteri Numarası" />
+        <Input size="large" htmlSize={40} placeholder="Müşteri Numarası" />
       </Form.Item>
       <Form.Item>
         <Button
+          title="Ara"
           className="right-flaoted"
           htmlType="submit"
           type="primary"
