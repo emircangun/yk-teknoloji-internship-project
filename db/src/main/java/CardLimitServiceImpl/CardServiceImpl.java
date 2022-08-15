@@ -15,12 +15,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.UUID;
+
 
 @GrpcService
 public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
 
-    private CardDao cardDao = new CardDao(); // Database connection is done in cardDao
+    private final CardDao cardDao = new CardDao(); // Database connection is done in cardDao
 
     private static final Logger LOG = LogManager.getLogger(CardServiceImpl.class.getName());
 
@@ -33,10 +33,8 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
 
     @Override
     public void getCards(CardRequest request, StreamObserver<CardResponse> responseObserver) {
-        //System.out.println("Request received from client: " + request);
 
         String uniqueID = request.getCorrID();
-        //Response icerigi ogrenilip customer no log constructer icine yazilacak
         LoggingMessage loggingMessage = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB recieved request from client: " + request, "getCards", "start");
         String logMessage = loggingMessage.toString();
         LOG.log(Level.INFO, logMessage);
@@ -47,7 +45,7 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
             List<CardEntity.Card> cardList = cardDao.findByCustomerNo(request.getCustomerNo(), uniqueID);
             for(CardEntity.Card selectedCard :cardList)
             {
-                //Building only one card from the coming card
+                //Building only one card from the coming cards
                 builder.addCards(
                         Card.newBuilder().
                                 setCardNo(selectedCard.getCardNo().toString()).

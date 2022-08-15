@@ -15,8 +15,8 @@ public class CardServer {
     public Server server;
 
     public void start() throws IOException {
-        // port number is hard-coded
-        // it will be nice to get the port number from properties file
+        // Port number is hard-coded
+        // It will be nice to get the port number from properties file
         int port = 9091;
 
         server = ServerBuilder.forPort(port)
