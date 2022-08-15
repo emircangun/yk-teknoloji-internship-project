@@ -1,4 +1,4 @@
-package CardLimitServer;
+package CardLimitServiceImpl.CardLimitServer;
 
 import CardLimitServiceImpl.CardServiceImpl;
 

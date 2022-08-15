@@ -1,6 +1,6 @@
 package CardLimitApplication;
 
-import CardLimitServer.CardServer;
+import CardLimitServiceImpl.CardLimitServer.CardServer;
 import java.io.IOException;
 
 public class CardLimitApplication {
