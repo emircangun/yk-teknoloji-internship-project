@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import { Table, Button } from "antd";
+import { Table } from "antd";
 const DataDisplay = ({ loading, data }) => {
   const columns = [
     {
@@ -17,15 +17,18 @@ const DataDisplay = ({ loading, data }) => {
 
   return (
     <React.Fragment>
-      <div className="customer-info">
+      {/* <div className="customer-info">
         <h4>{data.customerNo}</h4>
-      </div>
+      </div> */}
+      {console.log(data)}
       <Table
         loading={loading}
+        pagination={{ defaultPageSize: 4 }}
         columns={columns}
         bordered={true}
-        dataSource={data.cards}
+        dataSource={data}
         size="large"
+        tableLayout="fixed"
       />
     </React.Fragment>
   );
