@@ -18,11 +18,11 @@ public class Card
     @Id
     @GeneratedValue
     @Column(name="card_no")
-    private BigDecimal cardNo;
+    private String cardNo;
     @Column(name="customer_no")
-    private BigDecimal customerNo;
+    private String customerNo;
     @Column(name="account_no")
-    private BigDecimal accountNo;
+    private String accountNo;
     @Column(name="limit")
     private BigDecimal limit;
 }

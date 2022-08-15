@@ -48,7 +48,7 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
                 //Building only one card from the coming cards
                 builder.addCards(
                         Card.newBuilder().
-                                setCardNo(selectedCard.getCardNo().toString()).
+                                setCardNo(selectedCard.getCardNo()).
                                 setLimit(selectedCard.getLimit().doubleValue()).
                                 build()
                 );
