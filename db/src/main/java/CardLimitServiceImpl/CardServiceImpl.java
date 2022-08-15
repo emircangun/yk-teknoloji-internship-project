@@ -1,5 +1,6 @@
 package CardLimitServiceImpl;
 
+import builder.LogMessageBuilder;
 import com.ykteknolojistaj.protointerface.Card;
 import com.ykteknolojistaj.protointerface.CardRequest;
 import com.ykteknolojistaj.protointerface.CardResponse;
@@ -35,9 +36,14 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
     public void getCards(CardRequest request, StreamObserver<CardResponse> responseObserver) {
 
         String uniqueID = request.getCorrID();
-        LoggingMessage loggingMessage = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB recieved request from client: " + request, "getCards", "start");
-        String logMessage = loggingMessage.toString();
-        LOG.log(Level.INFO, logMessage);
+
+        LogMessageBuilder.Log(
+                LOG, request.getCustomerNo(), uniqueID,
+                this.getClass().getSimpleName(),
+                "DB recieved request from client: " + request,
+                "start",
+                Level.INFO
+        );
 
         CardResponse.Builder builder = CardResponse.newBuilder();
 
@@ -54,15 +60,23 @@ public class CardServiceImpl extends CardServiceGrpc.CardServiceImplBase {
                 );
             }
 
-            LoggingMessage loggingMessage2 = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB found card(s)" + builder, "getCards", "end");
-            logMessage = loggingMessage2.toString();
-            LOG.log(Level.INFO, logMessage);
+            LogMessageBuilder.Log(
+                    LOG, request.getCustomerNo(), uniqueID,
+                    this.getClass().getSimpleName(),
+                    "DB found card(s)" + builder,
+                    "end",
+                    Level.INFO
+            );
 
         } catch (NoSuchElementException noElementException) {
-            //System.out.println(noElementException);
-            LoggingMessage loggingMessage3 = new LoggingMessage(request.getCustomerNo(), uniqueID, "DB did not found any card", "getCards", "end");
-            logMessage = loggingMessage3.toString();
-            LOG.log(Level.ERROR, logMessage);
+
+            LogMessageBuilder.Log(
+                    LOG, request.getCustomerNo(), uniqueID,
+                    this.getClass().getSimpleName(),
+                    "DB did not found any card",
+                    "end",
+                    Level.ERROR
+            );
         }
 
         //System.out.println(builder);

@@ -58,6 +58,13 @@
             <artifactId>proto-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- Dependency for log application -->
+        <dependency>
+            <groupId>com.ykteknolojistaj</groupId>
+            <artifactId>logging</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
