@@ -11,19 +11,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-
-
 public class CardDao {
+
     private static final Logger LOG = LogManager.getLogger(CardDao.class.getName());
+
     /**
      * Returning the card of the given customer no
      * @param customerNo requested customer no
      * @return Card of the given customer
      */
     public List<Card> findByCustomerNo(String customerNo, String currID){
-
+        // for logging purpose
         String uniqueID = currID;
 
+        // logging before connecting to the database
         LogMessageBuilder.Log(
                 LOG, customerNo, uniqueID,
                 this.getClass().getSimpleName(),
@@ -32,6 +33,7 @@ public class CardDao {
                 Level.INFO
         );
 
+        // create a database connection
         String persistenceDB = "card-limit-database-jpa";
         HibernatePersistenceProvider provider = new HibernatePersistenceProvider();
         jakarta.persistence.EntityManagerFactory emf = provider.createEntityManagerFactory(persistenceDB, Collections.emptyMap());
@@ -42,7 +44,7 @@ public class CardDao {
                 "SELECT c FROM Card c WHERE c.customerNo = :customerNo",Card.class).setParameter("customerNo", customerNo).getResultList();
 
         // If there is no data with corresponding customer no
-        if(result == null){
+        if (result == null) {
             LogMessageBuilder.Log(
                     LOG, customerNo, uniqueID,
                     this.getClass().getSimpleName(),
@@ -54,6 +56,7 @@ public class CardDao {
             throw new NoSuchElementException("No data found with the customer no: " + customerNo);
         }
 
+        // logging after getting results
         LogMessageBuilder.Log(
                 LOG, customerNo, uniqueID,
                 this.getClass().getSimpleName(),
