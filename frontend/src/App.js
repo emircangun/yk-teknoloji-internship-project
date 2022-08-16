@@ -34,7 +34,7 @@ function App() {
       setTableLoading((prevState) => !prevState);
       await getCustomerData(values);
     } catch (err) {
-      message.error("Müşteri aranırken bir hata oluştu!");
+      message.error("Error!");
     } finally {
       setTableLoading((prevState) => !prevState);
     }
