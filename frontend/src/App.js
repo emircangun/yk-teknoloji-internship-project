@@ -20,24 +20,11 @@ function App() {
         },
       });
 
-      console.log();
       if (response.data.length === 0) {
         message.error("Client does not exist!");
-        return;
       }
-
       setData(response.data);
     } catch (err) {
-      if (err.response.status == 400) {
-        console.log(err.response.status);
-      } else if (err.response.status == 422) {
-        console.log(err.response.status);
-      } else if (err.response.status == 404) {
-        console.log(err.response.status);
-      }
-      //10 hane validation
-
-      console.log(err);
       message.warning(`${err.response.data.message} (${err.response.status})`);
     }
   };
