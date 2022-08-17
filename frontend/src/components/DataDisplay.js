@@ -17,13 +17,9 @@ const DataDisplay = ({ loading, data }) => {
 
   return (
     <React.Fragment>
-      {/* <div className="customer-info">
-        <h4>{data.customerNo}</h4>
-      </div> */}
-      {console.log(data)}
       <Table
         loading={loading}
-        pagination={{ defaultPageSize: 4 }}
+        pagination={{ defaultPageSize: 3 }}
         columns={columns}
         bordered={true}
         dataSource={data}

@@ -23,17 +23,34 @@ function App() {
       if (response.data.length === 0) {
         message.error("Client does not exist!");
       }
-      setData(response.data);
+      const data = response.data.map((card, index) => {
+        card.card_no = "💳 ".concat(formatCardNumber(card.card_no).toString());
+        card.limit = card.limit.toString().concat("₺");
+        card.key = index;
+        return card;
+      });
+
+      console.log(data);
+      setData(data);
     } catch (err) {
       message.warning(`${err.response.data.message} (${err.response.status})`);
     }
   };
 
+  const formatCardNumber = (value) => {
+    const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
+    const onlyNumbers = value.replace(/[^\d]/g, "");
+
+    return onlyNumbers.replace(regex, (regex, $1, $2, $3, $4) =>
+      [$1, $2, $3, $4].filter((group) => !!group).join("-")
+    );
+  };
   const getData = async (values) => {
     try {
       setTableLoading((prevState) => !prevState);
       await getCustomerData(values);
     } catch (err) {
+      console.log(err);
       message.error("Error!");
     } finally {
       setTableLoading((prevState) => !prevState);
@@ -53,10 +70,13 @@ function App() {
             <div className="query">
               <div className="header">
                 <h2>Kart Limit Sorgulama</h2>
+
+                <QueryComp getData={getData} />
               </div>
-              <QueryComp getData={getData} />
               <Divider />
-              <DataDisplay loading={tableLoading} data={data} />
+              <div className="table">
+                <DataDisplay loading={tableLoading} data={data} />
+              </div>
             </div>
           </Content>
         </Layout>

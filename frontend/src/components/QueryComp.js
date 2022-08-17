@@ -1,6 +1,6 @@
 import { Button, Input, Form } from "antd";
 import "./styles.css";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 
 const QueryComp = ({ getData }) => {
   const onFinish = async (values) => {
@@ -21,7 +21,12 @@ const QueryComp = ({ getData }) => {
           },
         ]}
       >
-        <Input size="large" htmlSize={40} placeholder="Müşteri Numarası" />
+        <Input
+          size="large"
+          htmlSize={40}
+          placeholder="Müşteri Numarası"
+          prefix={<UserOutlined />}
+        />
       </Form.Item>
       <Form.Item>
         <Button

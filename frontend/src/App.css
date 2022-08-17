@@ -17,6 +17,7 @@
   background-color: white;
   height: 100vh;
   padding: 2rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,6 +25,12 @@
 }
 .header {
   background-color: white !important;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 325px;
 }
 
 .layout {
