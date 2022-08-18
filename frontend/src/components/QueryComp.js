@@ -4,7 +4,6 @@ import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 
 const QueryComp = ({ getData }) => {
   const onFinish = async (values) => {
-    console.log(values);
     if (values != null) {
       await getData(values);
     }
@@ -36,6 +35,7 @@ const QueryComp = ({ getData }) => {
           type="primary"
           block
           icon={<SearchOutlined />}
+          maxLength={10}
         >
           Ara
         </Button>
