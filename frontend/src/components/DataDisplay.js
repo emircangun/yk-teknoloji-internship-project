@@ -19,7 +19,9 @@ const DataDisplay = ({ loading, data }) => {
     <React.Fragment>
       <Table
         loading={loading}
-        pagination={{ defaultPageSize: 3 }}
+        scroll={{ y: 240 }}
+        pagination={{ position: ["bottomCenter"] }}
+        /*pagination={{ defaultPageSize: 3 }}*/
         columns={columns}
         bordered={true}
         dataSource={data}
